@@ -1,29 +1,27 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 
 function addProductToCart(product) {
-  let products = getLocalStorage("so-cart") || [];
+  let cart = getLocalStorage("so-cart");
 
-  if(products.some((p) => p.ProductID === product.ProductID)) {
-    products = products.map((p) => {
-      if(p.ProductID === product.ProductID) {
-        p.Quantity++;
-        return p;
-      }
-      return p;
-    });
-  } 
-  else products.push(product);
+  // Ensure cart is always an array
+  if (!Array.isArray(cart)) {
+    cart = [];
+  }
 
-  setLocalStorage("so-cart", products);
+  // Add product to cart
+  cart.push(product);
+
+  setLocalStorage("so-cart", cart);
 }
-// add to cart button event handler
+
+// Add to cart button event handler
 async function addToCartHandler(e) {
   const product = await findProductById(e.target.dataset.id);
   addProductToCart(product);
 }
 
-// add listener to Add to Cart button
+// Add listener to Add to Cart button
 document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);
