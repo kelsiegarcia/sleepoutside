@@ -11,8 +11,7 @@ export function qs(selector, parent = document) {
 // }
 
 export function getLocalStorage(key) {
-  const item = localStorage.getItem(key);
-  return item ? JSON.parse(item) : [];
+  return JSON.parse(localStorage.getItem(key));
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
@@ -25,4 +24,10 @@ export function setClick(selector, callback) {
     callback();
   });
   qs(selector).addEventListener("click", callback);
+}
+
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
 }
