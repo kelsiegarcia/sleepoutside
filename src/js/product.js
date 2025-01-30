@@ -7,7 +7,7 @@ productDetails(productId);
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 
-function addProductToCart(product) {
+export function addProductToCart(product) {
   let cart = getLocalStorage("so-cart");
 
   // Ensure cart is always an array
