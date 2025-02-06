@@ -31,3 +31,33 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+export function renderWithTemplate(templateFn, targetElement, data, callback) {
+  templateFn().then(html => {
+      targetElement.innerHTML = html;
+      if (callback) callback();
+  });
+}
+
+export function loadTemplate(path) {
+  // wait what?  we are returning a new function? 
+  // this is called currying and can be very helpful.
+  return async function () {
+      const res = await fetch(path);
+      if (res.ok) {
+      const html = await res.text();
+      return html;
+      }
+  };
+} 
+
+export async function loadHeaderFooter() {
+  const headerEl = document.getElementById("main-header");
+  const footerEl = document.getElementById("main-footer");
+
+  const headerTemplateFn = loadTemplate("/partials/header.html");
+  const footerTemplateFn = loadTemplate("/partials/footer.html");
+
+  renderWithTemplate(headerTemplateFn, headerEl);
+  renderWithTemplate(footerTemplateFn, footerEl);
+}
