@@ -1,13 +1,10 @@
-import { getParam, loadHeaderFooter } from "./utils.mjs";
+import { getParam } from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
-
-loadHeaderFooter();
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { findProductById } from "./productData.mjs";
 
 const productId = getParam("product");
 productDetails(productId);
-
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
-import { findProductById } from "./productData.mjs";
 
 export function addProductToCart(product) {
   let cart = getLocalStorage("so-cart");

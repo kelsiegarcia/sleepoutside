@@ -1,6 +1,7 @@
 import { findProductById } from "./productData.mjs";
 import { setLocalStorage } from "./utils.mjs";
-import { addProductToCart } from "./product.js";	
+import { addProductToCart } from "./product.js";
+import { loadHeaderFooter } from "./utils.mjs";
 
 let product = {};
 
@@ -13,7 +14,6 @@ export default async function productDetails(productId) {
   //document.getElementById("addToCart").addEventListener("click", addToCart);
 }
 function addToCart() {
-
   addProductToCart(product);
 }
 function renderProductDetails() {
@@ -29,3 +29,5 @@ function renderProductDetails() {
     product.DescriptionHtmlSimple;
   document.querySelector("#addToCart").dataset.id = product.Id;
 }
+
+loadHeaderFooter();
