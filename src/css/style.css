@@ -202,6 +202,25 @@ button {
   grid-column: 3;
 }
 
+/* product list categories */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+  padding: 1em;
+}
+
+.category-grid img {
+  width: 100px;
+  height: 100px;
+}
+
+.category-grid a {
+  text-decoration: none;
+  color: var(--dark-grey);
+  text-align: center;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
