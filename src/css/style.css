@@ -210,6 +210,11 @@ button {
   padding: 1em;
 }
 
+.category-grid li {
+  list-style-type: none;
+  text-align: center;
+}
+
 .category-grid img {
   width: 100px;
   height: 100px;
