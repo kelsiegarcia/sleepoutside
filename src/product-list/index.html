@@ -3,62 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleep Outside | Product List</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <title>Sleep Outside | Home</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/product-list.js" type="module"></script>
   </head>
+
   <body>
     <header class="divider" id="main-header"></header>
     <main class="divider">
-      <div class="hero">
-        <img
-          src="../public/images/banner-sm.jpg"
-          srcset="images/banner-sm.jpg 500w, images/banner.jpg"
-          alt="image of a high mountain lake"
-        />
-        <div class="logo logo--square">
-          <img src="../public/images/noun_Tent_2517.svg" alt="tent image for logo" />
-          <div>Sleep<span class="highlight">Outside</span></div>
-        </div>
-      </div>
-      <section class="mission">
-        <p>We spend too much time these days indoors...sitting usually.</p>
-        <p>No wonder we are a mess!</p>
-        <p>
-          What we really need is to get outside...in fact SLEEP outside. Our
-          mission is to provide you with everything you need to do this
-          comfortably at an affordable price.
-        </p>
-      </section>
       <section class="products">
-        <ul class="category-grid">
-          <li>
-            <a href="../product-list/index.html?category=tents" class="category-box">
-              <img src="../public/images/categories/tent-icon.svg" alt="Tent Icon from Noun Project: Mustofa Bayu">
-              <p>Tents</p>
-            </a>
-          </li>
-          <li>
-            <a href="../product-list/index.html?category=sleeping-bags" class="category-box">
-              <img src="../public/images/categories/sleeping-bag-icon.svg" alt="Sleeping Bag Icon from Noun Project: Mustofa Bayu">
-              <p>Sleeping Bags</p>
-            </a>
-          </li>
-          <li>
-            <a href="../product-list/index.html?category=backpacks" class="category-box">
-              <img src="../public/images/categories/backpack-icon.svg" alt="Backpack Icon from Noun Project: Mustofa Bayu">
-              <p>Backpacks</p>
-            </a>
-          </li>
-          <li>
-            <a href="../product-list/index.html?category=hammocks" class="category-box">
-              <img src="../public/images/categories/hammock-icon.svg" alt="Hammock Icon from Noun Project: Paul Richard">
-              <p>Hammocks</p>
-            </a>
-          </li>
-        </ul>
+        <h2>Top Products: <span class="title"></span></h2>
+        <ul class="product-list"></ul>
       </section>
     </main>
     <footer id="main-footer"></footer>
-    <script src="../js/product-list.js" type="module" defer></script>
   </body>
 </html>
