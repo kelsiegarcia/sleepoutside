@@ -2,13 +2,13 @@ import { getData } from "./productData.mjs";
 
 export function productList(selector, category) {
   getData(category).then((data) => {
-    const allowedProducts = ["880RR", "985RF", "985PR", "344YJ"];
+    // const allowedProducts = ["880RR", "985RF", "985PR", "344YJ"];
 
-    const filteredProducts = data.filter((product) =>
-      allowedProducts.includes(product.Id)
-    );
+    // let filteredProducts = data.filter((product) =>
+    //   allowedProducts.includes(product.Id)
+    // );
 
-    const htmlItems = filteredProducts.map((item) => productCardTemplate(item));
+    const htmlItems = data.map((item) => productCardTemplate(item));
     document.querySelector(selector).innerHTML = htmlItems.join("");
   });
 }
