@@ -1,5 +1,5 @@
 import { productList } from "./productList.mjs";
-import { getParam, loadHeaderFooter } from "../js/utils.mjs";
+import { getParam, loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
 
