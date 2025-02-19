@@ -22,7 +22,7 @@ function renderCartContents() {
 }
 
 function setTotal(uniqueItems) {
-  let total = uniqueItems.reduce((acc, item) => acc + item.FinalPrice, 0);
+  let total = uniqueItems.reduce((acc, item) => acc + item.FinalPrice * item.quantity, 0);
   let cartFooter = document.querySelector(".cart-footer");
 
   if(total > 0){
