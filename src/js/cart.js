@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setClick } from "./utils.mjs";
 import { loadHeaderFooter } from "../js/utils.mjs";
 import shoppingCart from "./shoppingCart.mjs";
 
@@ -56,3 +56,7 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+
+setClick(".checkout-button", () => {
+  window.open("/checkout/index.html", "_self");
+});
