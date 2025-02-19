@@ -1,10 +1,11 @@
 import { getLocalStorage } from "./utils.mjs";
 
-const checkoutProcess = {
-    key: "",
+export const checkoutProcess = {
+    key: "so-cart",
     outputSelector: "",
     list: [],
     itemTotal: 0,
+    quantity: 0,
     shipping: 0,
     tax: 0,
     orderTotal: 0,
@@ -16,7 +17,12 @@ const checkoutProcess = {
     },
   calculateItemSummary: function() {
     // calculate and display the total amount of the items in the cart, and the number of items.
-    
+    this.itemTotal = this.list.reduce((acc, item) => acc + item.FinalPrice, 0);
+    this.quantity = this.list.length;
+
+
+    document.querySelector(".quantity").textContent = `${this.quantity}`;
+    document.querySelector(".item-subtotal").textContent = `$${this.itemTotal}`;
   },
   calculateOrdertotal: function() {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
@@ -29,4 +35,4 @@ const checkoutProcess = {
   }
   
 }
-export default checkoutProcess;
+//export default checkoutProcess;

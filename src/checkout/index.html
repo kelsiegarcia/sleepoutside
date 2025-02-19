@@ -57,10 +57,12 @@
 
         <fieldset>
             <legend>Order Summary</legend>
-            <p>Item Subtotal (X): <strong>$XX.XX</strong></p>
-            <p>Shipping Estimate: <strong>$XX.XX</strong></p>
-            <p>Tax: <strong>$XX.XX</strong></p>
-            <p><strong>Order Total: $XXX.XX</strong></p>
+            <div class="order-summary">
+              <p>Item Subtotal (<span class="quantity"></span>): <strong class="item-subtotal">$XX.XX</strong></p>
+              <p>Shipping Estimate: <strong>$XX.XX</strong></p>
+              <p>Tax: <strong>$XX.XX</strong></p>
+              <p><strong>Order Total: $XXX.XX</strong></p>
+            </div>
         </fieldset>
 
         <button type="submit" class="btn-checkout">Checkout</button>
