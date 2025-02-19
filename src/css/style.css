@@ -263,3 +263,26 @@ footer {
 .checkout-button:hover {
   background-color: var(--secondary-color);
 }
+
+/* checkout - form - layout */
+.container {
+  width: 50%;
+  margin: auto;
+}
+fieldset {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+legend {
+  font-weight: bold;
+}
+label {
+  display: block;
+  margin: 5px 0;
+}
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
