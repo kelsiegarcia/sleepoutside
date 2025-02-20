@@ -1,7 +1,7 @@
-import { getData } from "./productData.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 
 export function productList(selector, category) {
-  getData(category).then((data) => {
+  getProductsByCategory(category).then((data) => {
     // const allowedProducts = ["880RR", "985RF", "985PR", "344YJ"];
 
     // let filteredProducts = data.filter((product) =>
