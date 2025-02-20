@@ -6,54 +6,67 @@ loadHeaderFooter();
 shoppingCart();
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  if (!cartItems) {
+  const cartItems = getLocalStorage("so-cart") || [];
+  console.log("Cart Items from Local Storage:", cartItems);
+
+  const cartFooter = document.querySelector(".cart-footer");
+
+  if (!cartItems.length) {
     document.querySelector(".product-list").innerHTML = "<p>No items in cart</p>";
+    cartFooter.classList.add("hide"); 
     return;
-  } else {
-    const uniqueItems = Array.from(
-      new Set(cartItems.map((item) => item.Id))
-    ).map((id) => cartItems.find((item) => item.Id === id));
-    const htmlItems = uniqueItems.map((item) => cartItemTemplate(item));
-    document.querySelector(".product-list").innerHTML = htmlItems.join("");
-
-    setTotal(uniqueItems);
   }
+
+  cartFooter.classList.remove("hide"); 
+
+  const validItems = cartItems.filter(item => item && item.Id);
+  console.log("Valid Items Processed:", validItems);
+
+  const htmlItems = validItems.map(cartItemTemplate).join("");
+  document.querySelector(".product-list").innerHTML = htmlItems;
+
+  setTotal(validItems);
 }
 
-function setTotal(uniqueItems) {
-  let total = uniqueItems.reduce((acc, item) => acc + item.FinalPrice * item.quantity, 0);
-  let cartFooter = document.querySelector(".cart-footer");
 
-  if(total > 0){
-    cartFooter.classList.remove("hide");
 
-    document.querySelector(".cart-total-value").innerText = `$${total}`;
-  }
-  else{
-    cartFooter.classList.remove("hide");
-    document.querySelector(".cart-total-value").innerText = "";
-  }  
+function setTotal(cartItems) {
+  const total = cartItems.reduce((sum, item) => {
+    const price = item.FinalPrice || 0;
+    const quantity = item.quantity || 1;
+    return sum + price * quantity;
+  }, 0);
+
+  console.log("Cart Total:", total.toFixed(2));
+  document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
 }
+
+
 
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Images.PrimarySmall}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: ${item.quantity}</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
+  if (!item) {
+    console.error("Undefined cart item detected:", item);
+    return `<li class="cart-card divider">Error displaying item</li>`;
+  }
 
-  return newItem;
+  const imageUrl = item.Images?.PrimarySmall || item.Image || "default-image.jpg"; // Fallback image
+  const color = item.Colors?.[0]?.ColorName || "Unknown Color";
+  const price = item.FinalPrice ? `$${item.FinalPrice.toFixed(2)}` : "Price unavailable";
+  const quantity = item.quantity || 1;
+
+  return `<li class="cart-card divider">
+    <a href="#" class="cart-card__image">
+      <img src="${imageUrl}" alt="${item.Name}" />
+    </a>
+    <a href="#">
+      <h2 class="card__name">${item.Name}</h2>
+    </a>
+    <p class="cart-card__color">${color}</p>
+    <p class="cart-card__quantity">Qty: ${quantity}</p>
+    <p class="cart-card__price">${price}</p>
+  </li>`;
 }
+
 
 renderCartContents();
 

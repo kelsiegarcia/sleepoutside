@@ -202,7 +202,12 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
-
+.cart-footer {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  text-align: right;
+}
 /* product list categories */
 .category-grid {
   display: grid;
@@ -240,6 +245,7 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 }
+
 
 footer {
   font-size: var(--small-font);
