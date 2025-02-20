@@ -173,6 +173,7 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  width: 100%;
 }
 
 .cart-card__image {
@@ -243,4 +244,45 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+.hide {
+  display: none;
+}
+
+.checkout-button{
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5em 2em;
+  border: 0;
+  cursor: pointer;
+  font-size: var(--large-font);
+  margin: 1em 0;
+}
+
+.checkout-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* checkout - form - layout */
+.container {
+  width: 50%;
+  margin: auto;
+}
+fieldset {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+legend {
+  font-weight: bold;
+}
+label {
+  display: block;
+  margin: 5px 0;
+}
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
 }

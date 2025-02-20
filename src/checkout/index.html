@@ -20,6 +20,54 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+
+      <form action="/submit-order" method="POST">
+        <fieldset>
+            <legend>Shipping</legend>
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="fname" required>
+            
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="lname" required>
+            
+            <label for="street">Street</label>
+            <input type="text" id="street" name="street" required>
+            
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+            
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" required>
+            
+            <label for="zip">Zip</label>
+            <input type="text" id="zip" name="zip" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Payment</legend>
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="cardNumber" required>
+            
+            <label for="expiration">Expiration</label>
+            <input type="text" id="expiration" name="expiration" required>
+            
+            <label for="security-code">Security Code</label>
+            <input type="text" id="security-code" name="code" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Order Summary</legend>
+            <div class="order-summary">
+              <p>Item Subtotal (<span class="quantity"></span>): <strong class="item-subtotal">$XX.XX</strong></p>
+              <p>Shipping Estimate: <strong class="shipping">$XX.XX</strong></p>
+              <p>Tax: <strong class="tax">$XX.XX</strong></p>
+              <p><strong>Order Total: <span class="order-total"></span></strong></p>
+            </div>
+        </fieldset>
+
+        <button type="submit" class="btn-checkout">Checkout</button>
+        <br>
+    </form>
     </main>
 
     <footer id="main-footer"></footer>

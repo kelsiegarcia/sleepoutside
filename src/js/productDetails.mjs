@@ -13,9 +13,7 @@ export default async function productDetails(productId) {
   // once the HTML is rendered we can add a listener to Add to Cart button
   //document.getElementById("addToCart").addEventListener("click", addToCart);
 }
-function addToCart() {
-  addProductToCart(product);
-}
+
 function renderProductDetails() {
   document.querySelector("#productName").innerText = product.Brand.Name;
   document.querySelector("#productNameWithoutBrand").innerText =

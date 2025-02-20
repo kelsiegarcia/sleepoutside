@@ -39,11 +39,11 @@ export function renderListWithTemplate(
   position = "afterbegin",
   clear = true
 ) {
-  const htmlStrings = list.map(templateFn);
+  const htmlStrings = list?.map(templateFn);
   if (clear) {
     parentElement.innerHTML = "";
   }
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+  parentElement.insertAdjacentHTML(position, htmlStrings?.join(""));
 }
 
 export async function renderWithTemplate(
