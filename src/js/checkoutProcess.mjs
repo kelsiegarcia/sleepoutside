@@ -3,7 +3,7 @@ import { getLocalStorage } from './utils.mjs';
 export const checkoutProcess = {
   key: "so-cart",
   outputSelector: "",
-  list: [], // Default to empty array
+  list: [],
   itemTotal: 0,
   quantity: 0,
   shipping: 0,
@@ -16,24 +16,22 @@ export const checkoutProcess = {
     this.outputSelector = outputSelector;
     this.list = getLocalStorage(this.key) || [];
 
-    console.log("Cart items:", this.list); // Log full cart contents
+    console.log("Cart items:", this.list);
 
     this.calculateItemSummary();
   },
 
-  // Calculate the item summary by fetching from local storage
   calculateItemSummary: function () {
-    // Retrieve latest cart data
     this.list = getLocalStorage(this.key) || [];
     
     this.itemTotal = 0;
     this.quantity = 0;
 
     this.list.forEach((item, index) => {
-      console.log(`Item ${index + 1}:`, item); // Log each item
+      console.log(`Item ${index + 1}:`, item); 
       
       let itemPrice = parseFloat(item.FinalPrice);
-      let itemQuantity = 1;
+      let itemQuantity = item.quantity || 1;
 
       if (isNaN(itemPrice)) {
         console.warn(`Item ${index + 1} has invalid price:`, item.FinalPrice);
@@ -59,7 +57,6 @@ export const checkoutProcess = {
     this.calculateOrderTotal();
   },
 
-  // Calculate and update the shipping, tax, and order total
   calculateOrderTotal: function () {
     this.tax = this.itemTotal * 0.06; // 6% tax
     this.shipping = this.quantity > 0 ? 10 + (this.quantity - 1) * 2 : 0;
@@ -77,4 +74,44 @@ export const checkoutProcess = {
       orderTotal: this.orderTotal,
     });
   },
+
+  // Correct async method declaration
+  async checkout(form) {
+    const formData = new FormData(form);
+    const orderData = {
+      orderDate: new Date().toISOString(),
+      fname: formData.get('fname'),
+      lname: formData.get('lname'),
+      street: formData.get('street'),
+      city: formData.get('city'),
+      state: formData.get('state'),
+      zip: formData.get('zip'),
+      cardNumber: formData.get('cardNumber'),
+      expiration: formData.get('expiration'),
+      code: formData.get('code'),
+      items: this.packageItems(this.list), 
+      orderTotal: this.orderTotal.toFixed(2),
+      shipping: this.shipping,
+      tax: this.tax.toFixed(2),
+    };
+
+    console.log("Order Data:", orderData); 
+
+    // Use try-catch for error handling
+    try {
+      const response = await externalServices.checkout(orderData);  // Correct usage of await
+      console.log("Order response:", response); 
+    } catch (error) {
+      console.error("Error submitting order:", error); 
+    }
+  },
+
+  packageItems: function(items) {
+    return items.map(item => ({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+    }));
+  }
 };

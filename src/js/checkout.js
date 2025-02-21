@@ -3,13 +3,16 @@ import { checkoutProcess } from "./checkoutProcess.mjs"; // Import checkoutProce
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize the checkout process
   checkoutProcess.init("so-cart", ".order-summary");
-  checkoutProcess.calculateItemSummary();
-  checkoutProcess.calculateOrderTotal(); // Ensure this is calculated when the page loads
 
+  // Ensure item summary and order total are calculated on page load
+  checkoutProcess.calculateItemSummary();
+  checkoutProcess.calculateOrderTotal();
+
+  // Attach event listener to the form submit
   const checkoutForm = document.querySelector("form");
   checkoutForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    checkoutProcess.checkout(checkoutForm);
+    event.preventDefault(); // Prevent default form submission
+    checkoutProcess.checkout(checkoutForm); // Call checkout method
   });
 
   // Log the cart items directly from the checkoutProcess object
@@ -20,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (zipCodeInput) {
     zipCodeInput.addEventListener("change", function (e) {
       const zipCode = e.target.value;
-      checkoutProcess.calculateOrderTotal(zipCode);
+      checkoutProcess.calculateOrderTotal(zipCode); // Recalculate total based on zip code
     });
   }
 });

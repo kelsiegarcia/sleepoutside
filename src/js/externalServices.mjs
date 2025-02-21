@@ -1,3 +1,4 @@
+import { checkout } from './externalServices.mjs';
 const baseURL = "https://wdd330-backend.onrender.com";
 
 async function fetchJSON(url, options = {}) {
