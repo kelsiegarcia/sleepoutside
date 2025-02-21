@@ -1,34 +1,27 @@
-const baseURL = import.meta.env.VITE_SERVER_URL;
+const baseURL = "http://server-nodejs.cit.byui.edu:3000";
 
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
+async function fetchJSON(url, options = {}) {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error(`HTTP Error! Status: ${response.status}`);
   }
+  return response.json();
 }
 
 export async function checkout(orderData) {
-  const options = {
+  return fetchJSON(`${baseURL}/checkout`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(orderData),
-  };
-
-  const response = await fetch(`${baseURL}/checkout`, options);
-  return convertToJson(response);
+  });
 }
 
 export async function getProductsByCategory(category) {
-  const response = await fetch(baseURL + `products/search/${category}`);
-  const data = await convertToJson(response);
+  const data = await fetchJSON(`${baseURL}/products/search/${category}`);
   return data.Result;
 }
 
 export async function findProductById(id) {
-  const response = await fetch(baseURL + `product/${id}`);
-  const product = await convertToJson(response);
+  const product = await fetchJSON(`${baseURL}/product/${id}`);
   return product.Result;
 }
