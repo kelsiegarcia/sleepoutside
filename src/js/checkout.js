@@ -1,10 +1,10 @@
-import { checkoutProcess } from './checkoutProcess.mjs';  // Import checkoutProcess only once
+import { checkoutProcess } from "./checkoutProcess.mjs"; // Import checkoutProcess only once
 
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize the checkout process
   checkoutProcess.init("so-cart", ".order-summary");
   checkoutProcess.calculateItemSummary();
-  checkoutProcess.calculateOrderTotal();  // Ensure this is calculated when the page loads
+  checkoutProcess.calculateOrderTotal(); // Ensure this is calculated when the page loads
 
   const checkoutForm = document.querySelector("form");
   checkoutForm.addEventListener("submit", (event) => {

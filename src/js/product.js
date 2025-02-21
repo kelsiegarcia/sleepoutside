@@ -15,16 +15,15 @@ export function addProductToCart(product) {
   }
 
   // Check if product is already in cart
-  if(cart.some(item => item.Id === product.Id)) {
+  if (cart.some((item) => item.Id === product.Id)) {
     // Increment quantity
-    cart = cart.map(item => {
+    cart = cart.map((item) => {
       if (item.Id === product.Id) {
         item.quantity++;
       }
       return item;
     });
-  }
-  else{
+  } else {
     // Add product to cart
     product.quantity = 1;
     cart.push(product);

@@ -12,14 +12,15 @@ function renderCartContents() {
   const cartFooter = document.querySelector(".cart-footer");
 
   if (!cartItems.length) {
-    document.querySelector(".product-list").innerHTML = "<p>No items in cart</p>";
-    cartFooter.classList.add("hide"); 
+    document.querySelector(".product-list").innerHTML =
+      "<p>No items in cart</p>";
+    cartFooter.classList.add("hide");
     return;
   }
 
-  cartFooter.classList.remove("hide"); 
+  cartFooter.classList.remove("hide");
 
-  const validItems = cartItems.filter(item => item && item.Id);
+  const validItems = cartItems.filter((item) => item && item.Id);
   console.log("Valid Items Processed:", validItems);
 
   const htmlItems = validItems.map(cartItemTemplate).join("");
@@ -27,8 +28,6 @@ function renderCartContents() {
 
   setTotal(validItems);
 }
-
-
 
 function setTotal(cartItems) {
   const total = cartItems.reduce((sum, item) => {
@@ -38,10 +37,10 @@ function setTotal(cartItems) {
   }, 0);
 
   console.log("Cart Total:", total.toFixed(2));
-  document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+  document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(
+    2
+  )}`;
 }
-
-
 
 function cartItemTemplate(item) {
   if (!item) {
@@ -49,9 +48,12 @@ function cartItemTemplate(item) {
     return `<li class="cart-card divider">Error displaying item</li>`;
   }
 
-  const imageUrl = item.Images?.PrimarySmall || item.Image || "default-image.jpg"; // Fallback image
+  const imageUrl =
+    item.Images?.PrimarySmall || item.Image || "default-image.jpg"; // Fallback image
   const color = item.Colors?.[0]?.ColorName || "Unknown Color";
-  const price = item.FinalPrice ? `$${item.FinalPrice.toFixed(2)}` : "Price unavailable";
+  const price = item.FinalPrice
+    ? `$${item.FinalPrice.toFixed(2)}`
+    : "Price unavailable";
   const quantity = item.quantity || 1;
 
   return `<li class="cart-card divider">
@@ -66,7 +68,6 @@ function cartItemTemplate(item) {
     <p class="cart-card__price">${price}</p>
   </li>`;
 }
-
 
 renderCartContents();
 
