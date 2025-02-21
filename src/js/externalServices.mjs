@@ -1,4 +1,4 @@
-const baseURL = "http://server-nodejs.cit.byui.edu:3000";
+const baseURL = "https://wdd330-backend.onrender.com";
 
 async function fetchJSON(url, options = {}) {
   const response = await fetch(url, options);
