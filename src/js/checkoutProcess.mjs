@@ -1,5 +1,6 @@
 import { getLocalStorage } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
+import { setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 
 export const checkoutProcess = {
   key: "so-cart",
@@ -108,8 +109,15 @@ export const checkoutProcess = {
     try {
       const response = await checkout(orderData); // Correct usage of await
       console.log("Order response:", response);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
     } catch (error) {
-      console.error("Error submitting order:", error);
+      removeAllAlerts();
+      for (let message in error.message) {
+        alertMessage(error.message[message]);
+      }
+
+      console.log(error);
     }
   },
 

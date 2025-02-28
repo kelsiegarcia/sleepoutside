@@ -1,4 +1,5 @@
 import { checkoutProcess } from "./checkoutProcess.mjs"; // Import checkoutProcess only once
+import { loadHeaderFooter } from "./utils.mjs";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize the checkout process
@@ -27,3 +28,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+loadHeaderFooter();

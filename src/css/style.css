@@ -121,6 +121,7 @@ button {
 }
 .products {
   padding: 0.5em;
+	text-align: center;
 }
 .product-list {
   display: flex;
@@ -291,3 +292,20 @@ input {
   padding: 8px;
   margin-bottom: 10px;
 }
+
+.alert {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: orange;;
+	padding: 10px;
+	font-size: 20px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	margin: 0 auto;
+}
+
