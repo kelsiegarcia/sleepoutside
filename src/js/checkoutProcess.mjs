@@ -17,7 +17,7 @@ export const checkoutProcess = {
     this.outputSelector = outputSelector;
     this.list = getLocalStorage(this.key) || [];
 
-    console.log("Cart items:", this.list);
+    // console.log("Cart items:", this.list);
 
     this.calculateItemSummary();
   },
@@ -29,7 +29,7 @@ export const checkoutProcess = {
     this.quantity = 0;
 
     this.list.forEach((item, index) => {
-      console.log(`Item ${index + 1}:`, item);
+      // console.log(`Item ${index + 1}:`, item);
 
       let itemPrice = parseFloat(item.FinalPrice);
       let itemQuantity = item.quantity || 1;
@@ -48,7 +48,7 @@ export const checkoutProcess = {
       this.quantity += itemQuantity;
     });
 
-    console.log("Total Items:", this.quantity, "Subtotal:", this.itemTotal);
+    // console.log("Total Items:", this.quantity, "Subtotal:", this.itemTotal);
 
     // Update UI
     document.querySelector(".quantity").textContent = `${this.quantity}`;
