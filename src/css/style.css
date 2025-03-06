@@ -30,6 +30,14 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+#login-form{
+  margin: 20px auto;
+  padding: 10px;
+  width: 70%;
+}
+.center{
+  text-align: center;
+}
 .logo {
   line-height: 60px;
   width: 245px;

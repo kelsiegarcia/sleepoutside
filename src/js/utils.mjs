@@ -12,8 +12,16 @@ export function qs(selector, parent = document) {
 
 export function getLocalStorage(key) {
   const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : [];
+  if (!data) return null;  
+  try {
+    return JSON.parse(data); 
+  } catch (error) {
+    console.error(`Error parsing localStorage key "${key}":`, error);
+    return null;  
+  }
 }
+
+
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
