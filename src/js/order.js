@@ -4,15 +4,24 @@ import { fetchOrders } from "./currentOrders.mjs";
 document.addEventListener("DOMContentLoaded", async () => {
 // Protect the page  
     checkLogin();  
-  const ordersList = document.querySelector("#orders-list");
+    const tableBody = document.querySelector("#ordersTable tbody");
   const orders = await fetchOrders();
   console.log("Fetched orders:", orders);
   // Ensure orders is an array before calling forEach
   if (Array.isArray(orders)) {
+
     orders.forEach(order => {
-      const li = document.createElement("li");
-      li.textContent = `Order #${order.id}: ${order.fname} ${order.lname} - ${order.street}, ${order.city}`;
-      ordersList.appendChild(li);
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${order.id}</td>
+        <td>${new Date(order.orderDate).toDateString()}</td>
+        <td>${order.fname} ${order.lname}</td>
+        <td>${order.street}, ${order.city}, ${order.state}</td>
+        <td>$${order.orderTotal}</td>
+      `;
+
+      tableBody.appendChild(row);
     });
   } else {
     console.error("Expected an array but got:", orders);
