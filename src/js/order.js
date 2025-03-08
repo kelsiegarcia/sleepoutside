@@ -15,8 +15,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       row.innerHTML = `
         <td>${order.id}</td>
+        <td>${new Date(order.orderDate).toDateString()}</td>
         <td>${order.fname} ${order.lname}</td>
         <td>${order.street}, ${order.city}, ${order.state}</td>
+        <td>$${order.orderTotal}</td>
       `;
 
       tableBody.appendChild(row);
