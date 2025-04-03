@@ -214,12 +214,14 @@ button {
 
 /* Example to ensure visibility of the button */
 .remove-item {
-  display: inline-block;
+  grid-row: 3;
+  grid-column: 3;
   cursor: pointer;
   background-color: red; /* or any color to make it visible */
   color: white;
   padding: 5px;
-  border-radius: 50%;
+  border-radius: 20%;
+  margin-bottom: 5px;
 }
 
 .cart-footer {

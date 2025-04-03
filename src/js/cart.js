@@ -66,6 +66,7 @@ function cartItemTemplate(item) {
     <p class="cart-card__color">${color}</p>
     <p class="cart-card__quantity">Qty: ${quantity}</p>
     <p class="cart-card__price">${price}</p>
+    <button class="remove-item" data-id="${item.Id}">X</button>
   </li>`;
 }
 
