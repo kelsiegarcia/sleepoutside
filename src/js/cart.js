@@ -27,6 +27,9 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems;
 
   setTotal(validItems);
+
+  // Attach event listeners to the remove buttons
+  addRemoveEventListeners();
 }
 
 function setTotal(cartItems) {
@@ -37,9 +40,7 @@ function setTotal(cartItems) {
   }, 0);
 
   console.log("Cart Total:", total.toFixed(2));
-  document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(
-    2
-  )}`;
+  document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
 }
 
 function cartItemTemplate(item) {
@@ -68,6 +69,33 @@ function cartItemTemplate(item) {
     <p class="cart-card__price">${price}</p>
     <button class="remove-item" data-id="${item.Id}">X</button>
   </li>`;
+}
+
+function addRemoveEventListeners() {
+  // Select all remove buttons
+  const removeButtons = document.querySelectorAll(".remove-item");
+
+  // Attach click event to each remove button
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const itemId = e.target.dataset.id;  
+      removeItemFromCart(itemId);
+    });
+  });
+}
+
+function removeItemFromCart(itemId) {
+  // Get current cart from localStorage
+  const cartItems = getLocalStorage("so-cart") || [];
+
+  // Remove the item with the matching id
+  const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
+
+  // Save the updated cart back to localStorage
+  localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
+
+  // Re-render the cart contents
+  renderCartContents();
 }
 
 renderCartContents();
