@@ -5,11 +5,15 @@ import shoppingCart from "./shoppingCart.mjs";
 loadHeaderFooter();
 shoppingCart();
 
+// Function to render cart contents and update cart icon
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   console.log("Cart Items from Local Storage:", cartItems);
 
   const cartFooter = document.querySelector(".cart-footer");
+
+  // Always update cart icon 
+  updateCartIcon(cartItems.length);  
 
   if (!cartItems.length) {
     document.querySelector(".product-list").innerHTML =
@@ -28,10 +32,25 @@ function renderCartContents() {
 
   setTotal(validItems);
 
-  // Attach event listeners to the remove buttons
-  addRemoveEventListeners();
+  // Add event listeners to the remove buttons
+  addRemoveEventListeners(); 
 }
 
+// Always update cart icon with the number of items in the cart
+function updateCartIcon(itemCount) {
+  const cartItemCountElement = document.querySelector(".cart-item-count");
+  if (cartItemCountElement) {
+    // If no items in the cart, hide the number
+    if (itemCount === 0) {
+      cartItemCountElement.style.display = "none";
+    } else {
+      cartItemCountElement.style.display = "flex";  
+      cartItemCountElement.textContent = itemCount;  
+    }
+  }
+}
+
+// Update the total price
 function setTotal(cartItems) {
   const total = cartItems.reduce((sum, item) => {
     const price = item.FinalPrice || 0;
@@ -43,6 +62,7 @@ function setTotal(cartItems) {
   document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
 }
 
+// Template for rendering a cart item
 function cartItemTemplate(item) {
   if (!item) {
     console.error("Undefined cart item detected:", item);
@@ -50,7 +70,7 @@ function cartItemTemplate(item) {
   }
 
   const imageUrl =
-    item.Images?.PrimarySmall || item.Image || "default-image.jpg"; // Fallback image
+    item.Images?.PrimarySmall || item.Image || "default-image.jpg";  // Fallback image
   const color = item.Colors?.[0]?.ColorName || "Unknown Color";
   const price = item.FinalPrice
     ? `$${item.FinalPrice.toFixed(2)}`
@@ -71,34 +91,42 @@ function cartItemTemplate(item) {
   </li>`;
 }
 
+// Attach event listeners to the remove buttons
 function addRemoveEventListeners() {
-  // Select all remove buttons
   const removeButtons = document.querySelectorAll(".remove-item");
 
-  // Attach click event to each remove button
   removeButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      const itemId = e.target.dataset.id;  
+      const itemId = e.target.dataset.id; 
       removeItemFromCart(itemId);
     });
   });
 }
 
+// Remove an item from the cart and re-render the cart
 function removeItemFromCart(itemId) {
-  // Get current cart from localStorage
   const cartItems = getLocalStorage("so-cart") || [];
 
-  // Remove the item with the matching id
+  // Remove the item with the matching ID
   const updatedCartItems = cartItems.filter((item) => item.Id !== itemId);
 
   // Save the updated cart back to localStorage
   localStorage.setItem("so-cart", JSON.stringify(updatedCartItems));
 
-  // Re-render the cart contents
+  // Re-render the cart and update the cart icon
   renderCartContents();
 }
 
+// Initialize the cart on page load
 renderCartContents();
+
+// Always update the cart icon with the correct count from localStorage
+updateCartIcon(getLocalStorage("so-cart")?.length || 0);
+
+// Listen for cart changes 
+window.addEventListener("storage", () => {
+  updateCartIcon(getLocalStorage("so-cart")?.length || 0);
+});
 
 setClick(".checkout-button", () => {
   window.open("/checkout/index.html", "_self");

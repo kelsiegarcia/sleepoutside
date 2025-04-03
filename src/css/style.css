@@ -212,6 +212,23 @@ button {
   grid-column: 3;
 }
 
+.cart-item-count {
+  position: absolute;
+  top: 5px; 
+  right: -5px; 
+  background-color: yellow;
+  color: black;
+  border-radius: 50%; 
+  width: 20px; 
+  height: 20px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px; 
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* Example to ensure visibility of the button */
 .remove-item {
   grid-row: 3;
