@@ -211,11 +211,34 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+
+/* Example to ensure visibility of the button */
+.remove-item {
+  display: inline-block;
+  cursor: pointer;
+  background-color: red; /* or any color to make it visible */
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+}
+
 .cart-footer {
   margin-top: 20px;
   padding: 10px;
   background-color: #f8f8f8;
   text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding: 0px 10px;
+  margin: 0px 10px;
+}
+.cart-footer p {
+  display: inline;
+}
+.cart-footer button {
+  display: inline;
 }
 /* product list categories */
 .category-grid {
